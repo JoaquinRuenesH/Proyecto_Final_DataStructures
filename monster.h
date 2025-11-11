@@ -3,8 +3,18 @@
 #include<iostream>
 #include<string>
 
-template<typename T>
 class Monster{
+    private:
+        int id;
+        std::string name;
+        int HP; //health
+        int ATK; //attack
+        int DEF; //defense
+        int probability; //appearance probability
+        int reward; //reward for hero when defeating monster
     public:
-        bool uploadMonsters(string fileName);
+        Monster(int id, std::string name, int HP, int ATK, int DEF, int probability, int reward);
+        bool uploadMonsters(std::string fileName); //TODO
 };
+
+#include"monster.tpp"

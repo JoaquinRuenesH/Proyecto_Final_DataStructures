@@ -6,31 +6,39 @@
 #include<fstream>
 #include<sstream>
 
-using namespace std;
+Monster::Monster(int id, std::string name, int HP, int ATK, int DEF, int probability, int reward){
+    this->id = id;
+    this->name = name;
+    this->HP = HP;
+    this->ATK = ATK;
+    this->DEF = DEF;
+    this->probability = probability;
+    this->reward = reward;
+}
 
-bool uploadMonsters(string fileName) {
-	ifstream file(fileName);
-	string line;
+bool Monster::uploadMonsters(std::string fileName) { //TODO
+	std::ifstream file(fileName);
+	std::string line;
 	unsigned int size = 0;
 
 	if (!file.is_open()) {
-		cerr << "Error al abrir el archivo: " << fileName << endl;
+		std::cerr << "Error al abrir el archivo: " << fileName << std::endl;
 		return false;
 	}
 
 	// Saltar el encabezado
 	if(!getline(file, line)) {
-		cerr << "El archivo no tiene header" << endl;
+		std::cerr << "El archivo no tiene header" << std::endl;
 		file.close();
 		return false;
 	}
 
-	cout << "Cargando archivo: " << fileName << endl;
+	std::cout << "Cargando archivo: " << fileName << std::endl;
 
 	while (getline(file, line)) {
 		Monster	newMonster;
-		stringstream ss(line);
-		string cell;
+		std::stringstream ss(line);
+		std::string cell;
 		int campo = 0;
         int errores = 0;
 
@@ -71,7 +79,7 @@ bool uploadMonsters(string fileName) {
 		// entradas tiene cada clase, el número esta definido en el h
 		// como PCPART_ATTRIB_SIZE
 		if (errores || campo != PCPART_ATTRIB_SIZE) {
-			cerr << "Error en la linea:\n" << line << endl;
+			std::cerr << "Error en la linea:\n" << line << std::endl;
 			file.close();
 			return false;
 		}
@@ -81,7 +89,7 @@ bool uploadMonsters(string fileName) {
 			size++;
 		}
 		else {
-			cerr << "Error, el arreglo es muy pequeño" << endl;
+			std::cerr << "Error, el arreglo es muy pequeño" << std::endl;
 			file.close();
 			return false;
 		}
