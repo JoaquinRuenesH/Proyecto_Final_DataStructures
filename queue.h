@@ -1,20 +1,16 @@
 #pragma once
-#include"node.h"
+#include "Node.h"
 
-template<typename T>
-class Queue{
-    private:
-        Node<T>* topNode;
-        Node<T>* tail;
-        unsigned int size;
-    public:
-        Queue();
-        ~Queue();
-        void enqueue(const T& valor);
-        T dequeue();
-        T getFirst();
-        bool isEmpty();
-        void print();
+template <typename T>
+class Queue {
+private:
+    Node<T>* head;
+public:
+    Queue();
+    ~Queue();
+    void enqueue(const T& val);
+    T dequeue();
+    bool isEmpty();
 };
 
-#include"queue.tpp"
+#include "Queue.tpp"

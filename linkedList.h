@@ -1,25 +1,16 @@
 #pragma once
-#include"node.h"
+#include "Node.h"
 
-template<typename T>
-class LinkedList{
-    private:
-        Node<T>* head;
-        unsigned int size;
+template <typename T>
+class LinkedList {
+private:
+    Node<T>* head;
+public:
+    LinkedList();
+    ~LinkedList();
+    void insert(const T& val);
+    Node<T>* getHead();
+    void printLL();
+};
 
-    public:
-        LinkedList();
-        ~LinkedList();
-        unsigned int getSize() const;
-        bool isEmpty() const;
-        void pushFront(const T& value);
-        void pushBack(const T& value);
-        bool insert(unsigned int index, const T& value);
-        bool remove(const T& value);
-        Node<T>* elementAt(unsigned int index);
-        int getIndex(const T& value);
-        void clear();
-        void print();
-    };
-
-    #include"linkedList.tpp"
+#include "LinkedList.tpp"
