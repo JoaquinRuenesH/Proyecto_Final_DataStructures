@@ -13,6 +13,8 @@ class GameSetUp{
     public:
         GameSetUp();
         bool uploadMonsters(std::string fileName);
+        //bool uploadBoard(std::string fileName);
+        //bool exportStats();
 };
 
 #include"gameSetUp.tpp"
