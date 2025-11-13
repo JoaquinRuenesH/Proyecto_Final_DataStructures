@@ -13,7 +13,15 @@ class Monster{
         int probability; //appearance probability
         int reward; //reward for hero when defeating monster
     public:
+        Monster();
         Monster(int id, std::string name, int HP, int ATK, int DEF, int probability, int reward);
+        void setName(std::string nme);
+        void setHP(int hp);
+        void setATK(int atk);
+        void setDEF(int def);
+        void setProbability(int prob);
+        void setReward(int rwd);
+
 };
 
 #include"monster.tpp"
