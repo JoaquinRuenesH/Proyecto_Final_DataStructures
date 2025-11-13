@@ -15,6 +15,7 @@ class Monster{
     public:
         Monster();
         Monster(int id, std::string name, int HP, int ATK, int DEF, int probability, int reward);
+        void setID(int num);
         void setName(std::string nme);
         void setHP(int hp);
         void setATK(int atk);

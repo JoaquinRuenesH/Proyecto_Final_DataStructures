@@ -5,11 +5,15 @@
 #include"monster.h"
 #include"linkedList.h"
 
+#define MONSTER_ATRIB_SIZE 7
+
 class GameSetUp{
     private:
         LinkedList<Monster> monstersList; 
     public:
-        bool uploadMonsters(std::string fileName); //TODO
+        GameSetUp();
+        ~GameSetUp();
+        bool uploadMonsters(std::string fileName);
 };
 
 #include"gameSetUp.tpp"
