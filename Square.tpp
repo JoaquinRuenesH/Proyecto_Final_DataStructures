@@ -5,6 +5,8 @@ Square<T>::Square(const T& val) {
     data = val;
     visited = false;
     neighbors = new LinkedList<T>;
+    monster = nullptr;
+    treasure = false;
 }
 
 template <typename T>
@@ -50,4 +52,24 @@ void Square<T>::setEP(double EP) {
 template <typename T>
 double Square<T>::getEP() {
     return encounterProbability;
+}
+
+template <typename T>
+void Square<T>::setMonster(Monster* m) {
+    monster = m;
+}
+
+template <typename T>
+Monster* Square<T>::getMonster() {
+    return monster;
+}
+
+template <typename T>
+void Square<T>::setTreasure(bool t) {
+    treasure = t;
+}
+
+template <typename T>
+bool Square<T>::hasTreasure() {
+    return treasure;
 }

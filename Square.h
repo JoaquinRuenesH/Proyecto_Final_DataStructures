@@ -1,5 +1,6 @@
 #pragma once
 #include "LinkedList.h"
+#include "Monster.h"
 
 template <typename T>
 class Square {
@@ -8,6 +9,8 @@ private:
     bool visited;
     int id;
     double encounterProbability;
+    Monster* monster;
+    bool treasure;
 public:
     LinkedList<T>* neighbors;
     Square(const T& val);
@@ -20,6 +23,10 @@ public:
     int getId();
     void setEP(double EP);
     double getEP();
+    void setMonster(Monster* m);
+    Monster* getMonster();
+    void setTreasure(bool t);
+    bool hasTreasure();
 };
 
 #include "Square.tpp"

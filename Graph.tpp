@@ -3,6 +3,7 @@ using namespace std;
 
 #include "Graph.h"
 #include "Queue.h"
+#include "LinkedList.h"
 
 template <typename T>
 Graph<T>::Graph(int capacity) {
@@ -12,6 +13,7 @@ Graph<T>::Graph(int capacity) {
         adjacencyList[i] = nullptr;
     }
     count = 0;
+    treasureSquare = T{};
 }
 
 template <typename T>
@@ -25,7 +27,7 @@ Graph<T>::~Graph() {
 template <typename T>
 int Graph<T>::indexOf(const T& val) {
     for (int i = 0; i < count; i++) {
-        if (adjacencyList[i] -> getData() == val) {
+        if (adjacencyList[i] -> getName() == val) {
             return i;
         }
     }
@@ -43,6 +45,12 @@ void Graph<T>::addSquare(const T& val) {
 }
 
 template <typename T>
+void Graph<T>::addTreasure(const T& val) {
+    treasureSquareName = val;
+    adjacencyList[indexOf(treasureSquare)] -> setTreasure(true);
+}
+
+template <typename T>
 void Graph<T>::addEdge(const T& val1, const T& val2, bool directed) {
     int indexVal1 = indexOf(val1);
     int indexVal2 = indexOf(val2);
@@ -57,25 +65,42 @@ void Graph<T>::addEdge(const T& val1, const T& val2, bool directed) {
 }
 
 template <typename T>
-void Graph<T>::BFS(const T& val) {
+void Graph<T>::CheatBFS(const T& initialSquareName) {
+    T* pastSquareNames = new T[numSquares];
     Queue<T> q;
-    q.enqueue(val);
-    while (!q.isEmpty()) {
+    q.enqueue(initialSquareName);
+    while (!q.isEmpty() || currentVal != treasureSquare) {
         T currentVal = q.dequeue();
         Square<T>* currentSquare = adjacencyList[indexOf(currentVal)];
         if (!(currentSquare -> isVisited())) {
             currentSquare -> setVisited(true);
-            cout << currentSquare -> getData() << " -> ";
+            cout << currentVal << " -> ";
             Node<T>* neighbor = currentSquare -> neighbors -> getHead();
             while (neighbor) {
-                q.enqueue(neighbor -> getData());
+                q.enqueue(neighbor -> getName());
+                pastSquareNames[indexOf(neighbor -> getName())] = currentVal;
                 neighbor = neighbor -> getNext();
             }
         }
     }
+
+    LinkedList<T>* shortestPath = new LinkedList();
+    T next = treasureSquareName;
+    while (next != initialSquareName) {
+        shortestPath -> pushFront(next);
+        next = pastSquareNames[indexOf(next)]
+    }
+    shortestPath -> pushFront(next);
+
+    shortestPath -> printLL();
+
+     
     for (int i = 0; i < count; i++) {
         adjacencyList[i] -> setVisited(false);
     }
+
+    delete inversePath;
+    delete[] pastSquareVals;
 }
 
 template <typename T>

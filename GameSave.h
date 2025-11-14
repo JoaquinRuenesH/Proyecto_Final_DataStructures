@@ -3,18 +3,19 @@
 #include "Hero.h"
 
 template <typename T>
-class Exploration {
+class GameSave {
 private:
     Hero<T>* hero;
     Graph<T>* map;
     Square<T>* currentSquare;
-    Square<T>* treasureSquare;
-    int numSquaresVisited;
+    int moves;
+    T squaresVisited;
 public:
-    Exploration(Hero<T>* h, Graph<T>* map);
+    GameSave(Hero* h, Graph<T>* map);
     void showNeighbors();
     void move(const T& nameSquare);
-    void status();
+    void printCheatBFS();
+    void showGameStatus();
 };
 
-#include "Exploration.tpp"
+#include "GameSave.tpp"

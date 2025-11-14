@@ -1,17 +1,21 @@
 #pragma once
 #include "Hero.h"
-#include "monster.h" //M
+#include "Monster.h"
 
 class CombatSystem {
 private:
     Hero* hero;
     Monster* monster;
+    int attackMoves;
+    bool turns();
+    void herosTurn();
+    void monstersTurn();
+    void upgrade();
 public:
     CombatSystem(Hero* h, Monster* m);
-    bool Fight();
-    void HerosTurn();
-    void MonstersTurn();
-    void AfterMath();
+    bool fight();
+    void useCoolDownAbility();
+    void useTemporaryUpgrade();
 };
 
 #include "CombatSystem.tpp"
