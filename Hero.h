@@ -9,6 +9,7 @@ private:
     int HP;
     int ATK;
     int DEF;
+    int rewardPoints;
     bool coolDownAbility;
     bool temporaryUpgrade;
 public:
@@ -18,6 +19,7 @@ public:
     void setHP(int hp);
     void setATK(int atk);
     void setDEF(int def);
+    void setRewardPoints(int pts);
     void setCoolDownAbility(bool value);
     void setTemporaryUpgrade(bool value);
     int getId();
@@ -25,6 +27,7 @@ public:
     int getHP();
     int getATK();
     int getDEF();
+    int getRewardPoints();
     bool getCoolDownAbility();
     bool getTemporaryUpgrade();
 };

@@ -6,6 +6,7 @@ Hero::Hero(int id, std::string name, int HP, int ATK, int DEF){
     this->HP = HP;
     this->ATK = ATK;
     this->DEF = DEF;
+    this->rewardPoints = 0;
 }
 
 void Hero::setId(int num){
@@ -26,6 +27,10 @@ void Hero::setATK(int atk){
 
 void Hero::setDEF(int def){
     DEF = def;
+}
+
+void Hero::setRewardPoints(int pts){
+    rewardPoints = pts;
 }
 
 void Hero::setCoolDownAbility(bool value){
@@ -54,6 +59,10 @@ int Hero::getATK(){
         
 int Hero::getDEF(){
     return DEF;
+}
+
+int Hero::getRewardPoints(){
+    return rewardPoints;
 }
 
 bool Hero::getCoolDownAbility(){
