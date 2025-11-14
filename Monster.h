@@ -29,6 +29,7 @@ class Monster{
         int getDEF();
         float getProbability();
         int getReward();
+        void displayInfo();
 };
 
 #include"monster.tpp"

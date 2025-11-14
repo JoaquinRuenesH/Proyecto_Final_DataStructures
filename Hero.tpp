@@ -1,4 +1,5 @@
 #include "Hero.h"
+#include<iostream>
 
 Hero::Hero(int id, std::string name, int HP, int ATK, int DEF){
     this->id = id;
@@ -71,4 +72,25 @@ bool Hero::getCoolDownAbility(){
 
 bool Hero::getTemporaryUpgrade(){
     return temporaryUpgrade;
+}
+
+void Hero::displayInfo(){
+    std::cout<<"Hero:";
+    std::cout<<"\nName: "<<name;
+    std::cout<<"\nHP: "<<HP;
+    std::cout<<"\nATK: "<<ATK;
+    std::cout<<"\nDEF: "<<DEF;
+    std::cout<<"\nReward Points: "<<rewardPoints;
+
+    if(coolDownAbility){
+        std::cout<<"\nCooldown: Available";
+    }else{
+        std::cout<<"\nCooldown: Not Available";
+    }
+    
+    if(temporaryUpgrade){
+        std::cout<<"\nTemporary Upgrade: Available";
+    }else{
+        std::cout<<"\nTemporary Upgrade: Not Available";
+    }
 }

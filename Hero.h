@@ -30,6 +30,7 @@ public:
     int getRewardPoints();
     bool getCoolDownAbility();
     bool getTemporaryUpgrade();
+    void displayInfo();
 };
 
 #include "Hero.tpp"

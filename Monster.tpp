@@ -81,3 +81,12 @@ float Monster::getProbability(){
 int Monster::getReward(){
     return reward;
 }
+
+void Monster::displayInfo(){
+    std::cout<<"Monster:";
+    std::cout<<"\nName: "<<name;
+    std::cout<<"\nHP: "<<HP;
+    std::cout<<"\nATK: "<<ATK;
+    std::cout<<"\nDEF: "<<DEF;
+    std::cout<<"\nReward: "<<reward;
+}
