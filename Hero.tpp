@@ -8,6 +8,11 @@ Hero::Hero(int id, std::string name, int HP, int ATK, int DEF){
     this->ATK = ATK;
     this->DEF = DEF;
     this->rewardPoints = 0;
+    monstersDefeated = new LinkedList<string*>();
+}
+
+Hero::~Hero(){
+    delete monstersDefeated;
 }
 
 void Hero::setId(int num){
@@ -93,4 +98,8 @@ void Hero::displayInfo(){
     }else{
         std::cout<<"\nTemporary Upgrade: Not Available";
     }
+}
+
+LinkedList<string*>* Hero::getMonstersDefeated() {
+    return monstersDefeated;
 }

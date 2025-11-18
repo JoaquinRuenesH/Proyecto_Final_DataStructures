@@ -2,9 +2,10 @@
 
 template <typename T>
 Square<T>::Square(const T& val) {
-    data = val;
+    name = val;
     visited = false;
-    neighbors = new LinkedList<T>;
+    visitedBFS = false;
+    neighbors = new LinkedList<T>();
     monster = nullptr;
     treasure = false;
 }
@@ -32,6 +33,16 @@ bool Square<T>::isVisited() {
 template <typename T>
 void Square<T>::setVisited(bool state) {
     visited = state;
+}
+
+template <typename T>
+bool Square<T>::isVisitedBFS() {
+    return visitedBFS;
+}
+
+template <typename T>
+void Square<T>::setVisitedBFS(bool state) {
+    visitedBFS = state;
 }
 
 template <typename T>

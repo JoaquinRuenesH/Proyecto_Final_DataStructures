@@ -11,6 +11,7 @@ public:
     void enqueue(const T& val);
     T dequeue();
     bool isEmpty();
+    void clear();
 };
 
 #include "Queue.tpp"

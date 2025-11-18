@@ -12,8 +12,10 @@ private:
     int rewardPoints;
     bool coolDownAbility;
     bool temporaryUpgrade;
+    LinkedList<string*>* monstersDefeated;
 public:
     Hero(int id, std::string name, int HP, int ATK, int DEF);
+    ~Hero();
     void setId(int num);
     void setName(std::string nme);
     void setHP(int hp);
@@ -31,6 +33,7 @@ public:
     bool getCoolDownAbility();
     bool getTemporaryUpgrade();
     void displayInfo();
+    LinkedList<string*>* getMonstersDefeated();
 };
 
 #include "Hero.tpp"

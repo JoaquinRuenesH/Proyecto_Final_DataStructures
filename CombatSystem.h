@@ -11,11 +11,14 @@ private:
     void herosTurn();
     void monstersTurn();
     void upgrade();
+    void requestUseCoolDown();
+    void requestUseTemporaryUpgrade();
 public:
     CombatSystem(Hero* h, Monster* m);
     bool fight();
     void useCoolDownAbility();
     void useTemporaryUpgrade();
+    int getAttackMoves();
 };
 
 #include "CombatSystem.tpp"

@@ -7,6 +7,7 @@ class Square {
 private:
     T name;
     bool visited;
+    bool visitedBFS;
     int id;
     double encounterProbability;
     Monster* monster;
@@ -19,6 +20,8 @@ public:
     void setName(const T& val);
     bool isVisited();
     void setVisited(bool state);
+    bool isVisitedBFS();
+    void setVisitedBFS(bool state);
     void setId(int id);
     int getId();
     void setEP(double EP);

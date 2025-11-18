@@ -35,6 +35,18 @@ Node<T>* LinkedList<T>::getHead() {
 }
 
 template <typename T>
+Node<T>* LinkedList<T>::getNode(const T& val) {
+    Node<T>* current = head;
+    while (current) {
+        if (current -> getData() == val) {
+            return current;
+        }
+        current = current -> getNext();
+    }
+    return nullptr;  
+}
+
+template <typename T>
 void LinkedList<T>::printLL() {
     if (!head) {
         cout << "[]";
@@ -47,4 +59,34 @@ void LinkedList<T>::printLL() {
         current = current -> getNext();
     }
     cout << current -> getData() << "]";
+}
+
+template <typename T>
+void LinkedList<T>::printLLTuples() {
+    if (!head) {
+        cout << "[]";
+        return;
+    }
+    Node<T>* current = head;
+    cout << "[";
+    while (current -> getNext()) {
+        cout << "[" << current -> getData()[0] << ", ";
+        cout << current -> getData()[1] << "], ";
+        current = current -> getNext();
+    }
+    cout << "[" << current -> getData()[0] << ", ";
+    cout << current -> getData()[1] << "]]";
+}
+
+template <typename U>
+Square<U>* getSquare(LinkedList<Square<U>*>* list, const U& val) {
+    Node<Square<U>*>* current = list -> getHead();
+    while (current) {
+        Square<U>* square = current -> getData();
+        if (square && square -> getName() == val) {
+            return square;
+        }
+        current = current -> getNext();
+    }
+    return nullptr;
 }
