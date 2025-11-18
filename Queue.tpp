@@ -7,14 +7,7 @@ Queue<T>::Queue() {
 
 template <typename T>
 Queue<T>::~Queue() {
-    Node<T>* current = head;
-    Node<T>* temp;
-    while (current) {
-        temp = current;
-        current = current -> getNext();
-        delete temp;
-    }
-    head = nullptr;
+    clear();
 }
 
 template <typename T>
@@ -56,4 +49,16 @@ T Queue<T>::dequeue() {
 template <typename T>
 bool Queue<T>::isEmpty() {
     return head == nullptr;
+}
+
+template <typename T>
+void Queue<T>::clear() {
+    Node<T>* current = head;
+    Node<T>* temp;
+    while (current) {
+        temp = current;
+        current = current -> getNext();
+        delete temp;
+    }
+    head = nullptr;
 }

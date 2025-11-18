@@ -6,104 +6,134 @@ using namespace std;
 #include "LinkedList.h"
 
 template <typename T>
-Graph<T>::Graph(int capacity) {
-    numSquares = capacity;
-    adjacencyList = new Square<T>*[numSquares];
-    for (int i = 0; i < numSquares; i++) {
-        adjacencyList[i] = nullptr;
-    }
-    count = 0;
-    treasureSquare = T{};
+Graph<T>::Graph() {
+    adjacencyList = new LinkedList<Square<T>*>();
+    treasureSquareName = T{};
 }
 
 template <typename T>
 Graph<T>::~Graph() {
-    for (int i = 0; i < count; i++) {
-        delete adjacencyList[i];
-    }
-    delete[] adjacencyList;
-}
-
-template <typename T>
-int Graph<T>::indexOf(const T& val) {
-    for (int i = 0; i < count; i++) {
-        if (adjacencyList[i] -> getName() == val) {
-            return i;
-        }
-    }
-    return -1;
+    delete adjacencyList;
 }
 
 template <typename T>
 void Graph<T>::addSquare(const T& val) {
-    if (count >= numSquares) {
-        cout << "This graph has reached full capacity\n";
+    if (getSquare(adjacencyList, val)) {
         return;
     }
     Square<T>* newSquare = new Square<T>(val);
-    adjacencyList[count++] = newSquare;
+    adjacencyList -> pushFront(newSquare);
 }
 
 template <typename T>
 void Graph<T>::addTreasure(const T& val) {
     treasureSquareName = val;
-    adjacencyList[indexOf(treasureSquare)] -> setTreasure(true);
+    Square<T>* treasureSquare = getSquare(adjacencyList, treasureSquareName);
+    treasureSquare -> setTreasure(true);
+}
+
+template <typename T>
+void Graph<T>::addMonster(const T& squareName, Monster* m) {
+    Square<T>* square = getSquare(adjacencyList, squareName);
+    square -> setMonster(m);
 }
 
 template <typename T>
 void Graph<T>::addEdge(const T& val1, const T& val2, bool directed) {
-    int indexVal1 = indexOf(val1);
-    int indexVal2 = indexOf(val2);
-    if (indexVal1 == -1 || indexVal2 == -1) {
-        cout << "Square or Squares not in the graph\n";
+    Square<T>* v1 = getSquare(adjacencyList, val1);
+    Square<T>* v2 = getSquare(adjacencyList, val2);
+    if (!v1 || !v2) {
+        cout << "Square or squares not in the graph\n";
         return;
     }
-    (adjacencyList[indexVal1] -> neighbors) -> pushFront(val2);
+    (v1 -> neighbors) -> pushFront(val2);
     if (!directed) {
-        (adjacencyList[indexVal2] -> neighbors) -> pushFront(val1);
+        (v2 -> neighbors) -> pushFront(val1);
     }
 }
 
 template <typename T>
 void Graph<T>::CheatBFS(const T& initialSquareName) {
-    T* pastSquareNames = new T[numSquares];
+    LinkedList<T*>* ParentSonList = new LinkedList<T*>;
+    T* parentSon = new T[2];
+    parentSon[0] = T{};
+    parentSon[1] = initialSquareName;
+    ParentSonList -> pushFront(parentSon);
+
     Queue<T> q;
     q.enqueue(initialSquareName);
-    while (!q.isEmpty() || currentVal != treasureSquare) {
-        T currentVal = q.dequeue();
-        Square<T>* currentSquare = adjacencyList[indexOf(currentVal)];
-        if (!(currentSquare -> isVisited())) {
-            currentSquare -> setVisited(true);
-            cout << currentVal << " -> ";
-            Node<T>* neighbor = currentSquare -> neighbors -> getHead();
-            while (neighbor) {
-                q.enqueue(neighbor -> getName());
-                pastSquareNames[indexOf(neighbor -> getName())] = currentVal;
-                neighbor = neighbor -> getNext();
+    while (!q.isEmpty()) {
+        T currentSquareName = q.dequeue();
+        if (currentSquareName != treasureSquareName) {
+            Square<T>* currentSquare = getSquare(adjacencyList, currentSquareName);
+            if (!(currentSquare -> isVisitedBFS())) {
+                currentSquare -> setVisitedBFS(true);
+                Node<T>* neighbor = currentSquare -> neighbors -> getHead();
+                while (neighbor) {
+                    q.enqueue(neighbor -> getData());
+                    if (!findTuple(ParentSonList, neighbor -> getData())) {
+                        T* parentSon = new T[2];
+                        parentSon[0] = currentSquareName;
+                        parentSon[1] = neighbor -> getData();
+                        ParentSonList -> pushFront(parentSon);
+                    }
+                    neighbor = neighbor -> getNext();
+                }
             }
+        } else {
+            q.clear();
         }
     }
 
-    LinkedList<T>* shortestPath = new LinkedList();
-    T next = treasureSquareName;
-    while (next != initialSquareName) {
-        shortestPath -> pushFront(next);
-        next = pastSquareNames[indexOf(next)]
-    }
-    shortestPath -> pushFront(next);
+    LinkedList<T>* orderedList = new LinkedList<T>();
 
-    shortestPath -> printLL();
-
-     
-    for (int i = 0; i < count; i++) {
-        adjacencyList[i] -> setVisited(false);
+    Node<T*>* currentNode = findTuple(ParentSonList, treasureSquareName);
+    orderedList -> pushFront(treasureSquareName);
+    T parent = currentNode -> getData()[0];
+    while (parent != T{}) {
+        orderedList -> pushFront(parent);
+        currentNode = findTuple(ParentSonList, parent);
+        parent = currentNode -> getData()[0];
     }
 
-    delete inversePath;
-    delete[] pastSquareVals;
+    orderedList -> printLL();
+
+    delete orderedList;
+
+    Node<T*>* tupleNode = ParentSonList -> getHead();
+    while (tupleNode) {
+        delete[] tupleNode -> getData();
+        tupleNode = tupleNode -> getNext();
+    }
+    
+    delete ParentSonList;
+
+    Node<Square<T>*>* head = adjacencyList -> getHead();
+    while (head) {
+        head -> getData() -> setVisitedBFS(false);
+        head = head -> getNext();
+    }
 }
 
 template <typename T>
-Square<T>** Graph<T>::getAdjacencyList() {
+Node<T*>* Graph<T>::findTuple(LinkedList<T*>* parentSonList, const T& val, int index) {
+    Node<T*>* current = parentSonList -> getHead();
+    while (current) {
+        if (current -> getData()[index] == val) {
+            return current;
+        }
+        current = current -> getNext();
+    }
+    return nullptr;
+}
+
+
+template <typename T>
+LinkedList<Square<T>*>* Graph<T>::getAdjacencyList() {
     return adjacencyList;
+}
+
+template <typename T>
+T Graph<T>::getTreasureSquareName() {
+    return treasureSquareName;
 }
