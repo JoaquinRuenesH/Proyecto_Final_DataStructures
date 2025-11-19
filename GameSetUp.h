@@ -3,17 +3,22 @@
 #include<iostream>
 #include<string>
 #include"monster.h"
+#include"graph.h"
 #include"linkedList.h"
 
 #define MONSTER_ATRIB_SIZE 7
 
+using namespace std;
+
 class GameSetUp{
     private:
-        LinkedList<Monster> monstersList; 
+        LinkedList<Monster*>* monstersList;
+        Graph<string>* map;
     public:
         GameSetUp();
-        bool uploadMonsters(std::string fileName);
-        //bool uploadBoard(std::string fileName);
+        ~GameSetUp();
+        bool uploadMonsters(string fileName);
+        bool uploadMap(string fileName);
         //bool exportStats();
 };
 

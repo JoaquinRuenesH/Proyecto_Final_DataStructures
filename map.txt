@@ -1,0 +1,17 @@
+7
+7
+Arkham Asylum
+Police Department
+Gotham's Hospital
+The Sewers
+The Pit
+City Hall
+Batcave
+Arkham Asylum,Police Department
+Police Department,Gotham's Hospital
+Police Department,City Hall
+Gotham's Hospital,The Sewers
+The Sewers,The Pit
+City Hall,Batcave
+The Sewers,Batcave
+Arkham Asylum
