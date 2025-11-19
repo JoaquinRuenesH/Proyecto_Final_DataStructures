@@ -14,9 +14,9 @@ GameSave<T>::GameSave(Hero* h, Graph<T>* map) {
 
 template <typename T>
 void GameSave<T>::showNeighbors() {
-    LinkedList<T>* squareOptions = currentSquare -> neighbors;
+    LinkedList<T*>* squareOptions = currentSquare -> neighbors;
     cout << "Square options: ";
-    squareOptions -> printLL();
+    squareOptions -> printLLFirstTupleVal();
     cout << "\n---------------\n";
 }
 
@@ -58,8 +58,19 @@ void GameSave<T>::printCheatBFS() {
         cout << "There is no treasure left in this map\n";
         return;
     }
-    cout << "The fastest route from your square to the treasure is: ";
-    map -> CheatBFS(currentSquare -> getName());
+    cout << "The shortest route from your square to the treasure is: ";
+    map -> cheatBFS(currentSquare -> getName());
+    cout << "\n---------------\n";
+}
+
+template <typename T>
+void GameSave<T>::printDijkstra() {
+    if (map -> getTreasureSquareName() == T{}) {
+        cout << "There is no treasure left in this map\n";
+        return;
+    }
+    cout << "The best route from your square to the treasure is: ";
+    map -> dijkstra(currentSquare -> getName());
     cout << "\n---------------\n";
 }
 

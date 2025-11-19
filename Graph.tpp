@@ -13,6 +13,13 @@ Graph<T>::Graph() {
 
 template <typename T>
 Graph<T>::~Graph() {
+    Node<Square<T>*>* head = adjacencyList -> getHead();
+    Square<T>* tempData;
+    while (head) {
+        tempData = head -> getData();
+        head = head -> getNext();
+        delete tempData;
+    }
     delete adjacencyList;
 }
 
@@ -39,21 +46,27 @@ void Graph<T>::addMonster(const T& squareName, Monster* m) {
 }
 
 template <typename T>
-void Graph<T>::addEdge(const T& val1, const T& val2, bool directed) {
+void Graph<T>::addEdge(const T& val1, const T& val2, const T& weight, bool directed) {
     Square<T>* v1 = getSquare(adjacencyList, val1);
     Square<T>* v2 = getSquare(adjacencyList, val2);
     if (!v1 || !v2) {
         cout << "Square or squares not in the graph\n";
         return;
     }
-    (v1 -> neighbors) -> pushFront(val2);
+    T* valWeight = new T[2];
+    valWeight[0] = val2;
+    valWeight[1] = weight;
+    (v1 -> neighbors) -> pushFront(valWeight);
     if (!directed) {
-        (v2 -> neighbors) -> pushFront(val1);
+        T* valWeight2 = new T[2];
+        valWeight2[0] = val1;
+        valWeight2[1] = weight;
+        (v2 -> neighbors) -> pushFront(valWeight2);
     }
 }
 
 template <typename T>
-void Graph<T>::CheatBFS(const T& initialSquareName) {
+void Graph<T>::cheatBFS(const T& initialSquareName) {
     LinkedList<T*>* ParentSonList = new LinkedList<T*>;
     T* parentSon = new T[2];
     parentSon[0] = T{};
@@ -68,13 +81,13 @@ void Graph<T>::CheatBFS(const T& initialSquareName) {
             Square<T>* currentSquare = getSquare(adjacencyList, currentSquareName);
             if (!(currentSquare -> isVisitedBFS())) {
                 currentSquare -> setVisitedBFS(true);
-                Node<T>* neighbor = currentSquare -> neighbors -> getHead();
+                Node<T*>* neighbor = currentSquare -> neighbors -> getHead();
                 while (neighbor) {
-                    q.enqueue(neighbor -> getData());
-                    if (!findTuple(ParentSonList, neighbor -> getData())) {
+                    q.enqueue(neighbor -> getData()[0]);
+                    if (!findTuple(ParentSonList, neighbor -> getData()[0])) {
                         T* parentSon = new T[2];
                         parentSon[0] = currentSquareName;
-                        parentSon[1] = neighbor -> getData();
+                        parentSon[1] = neighbor -> getData()[0];
                         ParentSonList -> pushFront(parentSon);
                     }
                     neighbor = neighbor -> getNext();
@@ -113,6 +126,11 @@ void Graph<T>::CheatBFS(const T& initialSquareName) {
         head -> getData() -> setVisitedBFS(false);
         head = head -> getNext();
     }
+}
+
+template <typename T>
+void Graph<T>::dijkstra(const T& initialSquareName) {
+    //TODO
 }
 
 template <typename T>

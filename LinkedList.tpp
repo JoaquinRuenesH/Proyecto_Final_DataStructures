@@ -62,6 +62,21 @@ void LinkedList<T>::printLL() {
 }
 
 template <typename T>
+void LinkedList<T>::printLLFirstTupleVal() {
+    if (!head) {
+        cout << "[]";
+        return;
+    }
+    Node<T>* current = head;
+    cout << "[";
+    while (current -> getNext()) {
+        cout << current -> getData()[0] << ", ";
+        current = current -> getNext();
+    }
+    cout << current -> getData()[0] << "]";
+}
+
+template <typename T>
 void LinkedList<T>::printLLTuples() {
     if (!head) {
         cout << "[]";
