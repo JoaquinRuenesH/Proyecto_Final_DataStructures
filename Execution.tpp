@@ -36,6 +36,7 @@ bool Execution::start(string monstersFile, string mapFile){
     string cityName;
     player -> showGameStatus();
     player -> printCheatBFS();
+	player -> printDijkstra();
     
     while (!player -> isGameOver()) {
         player -> showNeighbors();
