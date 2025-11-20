@@ -6,12 +6,12 @@ Gotham's Hospital,4
 The Sewers,2
 The Pit,3
 City Hall,1
-Batcave
-Arkham Asylum,Police Department
-Police Department,Gotham's Hospital
-Police Department,City Hall
-Gotham's Hospital,The Sewers
-The Sewers,The Pit
-City Hall,Batcave
-The Sewers,Batcave
+Batcave,-1
+Arkham Asylum,Police Department,10
+Police Department,Gotham's Hospital,4
+Police Department,City Hall,8
+Gotham's Hospital,The Sewers,3
+The Sewers,The Pit,9
+City Hall,Batcave,7
+The Sewers,Batcave,2
 Arkham Asylum

@@ -1,3 +1,5 @@
+#pragma once
+
 #include"GameSave.h"
 #include"Hero.h"
 #include"Monster.h"
@@ -25,3 +27,5 @@ class Execution{
         ~Execution();
         bool start(string monstersFile, string mapFile);
 };
+
+#include"Execution.tpp"

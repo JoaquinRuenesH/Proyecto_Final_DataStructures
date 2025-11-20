@@ -235,6 +235,7 @@ bool Execution::uploadMap(string fileName){
 		string currentSquare = "";
         int monsterId;
         Monster* ptrMonster = nullptr;
+		bool addMonster = true;
 
 		while (getline(ss, cell, ',')) {
 			if(!cell.length()){
@@ -255,12 +256,15 @@ bool Execution::uploadMap(string fileName){
 						errors++;
 					}
 
-                    ptrMonster = searchMonster(monsterId);
-
-                    if(!ptrMonster){
-                        cout<<"Error in Monster ID on file"<<endl;
-                        errors++;
-                    }
+					if(monsterId != -1){
+						ptrMonster = searchMonster(monsterId);
+						if(!ptrMonster){
+							cout<<"Error in Monster ID on file"<<endl;
+							errors++;
+						}
+					}else{
+						addMonster = false;
+					}
 
                     break;
 
@@ -279,7 +283,10 @@ bool Execution::uploadMap(string fileName){
 			return false;
 		}
 
-        map->addMonster(currentSquare, ptrMonster);
+		if(addMonster){
+        	map->addMonster(currentSquare, ptrMonster);
+		}
+		
 		i++;
 	}
 
