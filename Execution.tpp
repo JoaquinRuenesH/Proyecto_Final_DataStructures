@@ -26,7 +26,7 @@ bool Execution::start(string monstersFile, string mapFile){
     if(!uploadMap(mapFile)) return false;
 
     string name;
-    cout<<"Enter your name: ";
+    cout<<"Enter your hero's name: ";
     getline(cin, name);
 
     Hero* hero = new Hero(1, name, 100, 30, 30); // se mete esto al constructor?
