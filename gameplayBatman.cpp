@@ -47,6 +47,7 @@ int main() {
     string cityName;
     player1 -> showGameStatus();
     player1 -> printCheatBFS();
+    player1 -> printDijkstra();
     
     while (!player1 -> isGameOver()) {
         player1 -> showNeighbors();

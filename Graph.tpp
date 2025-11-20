@@ -130,7 +130,69 @@ void Graph<T>::cheatBFS(const T& initialSquareName) {
 
 template <typename T>
 void Graph<T>::dijkstra(const T& initialSquareName) {
-    //TODO
+    Node<Square<T>*>* head = adjacencyList -> getHead();
+    LinkedList<T*>* verticesInfo = new LinkedList<T*>;
+    while (head) {
+        T* info = new T[4];
+        info[0] = head -> getData() -> getName(); // Vertex name
+        info[1] = to_string(INT_MAX); // Min distance found
+        info[2] = "notVisited"; // Visited
+        info[3] = T{}; // Parent
+        verticesInfo -> pushFront(info);
+        head = head -> getNext();
+    }
+    getInfo(verticesInfo, initialSquareName)[1] = "0";
+    
+    T currentSquareName = initialSquareName;
+    Square<T>* currentSquare = getSquare(adjacencyList, currentSquareName);
+    while (getInfo(verticesInfo, treasureSquareName)[2] == "notVisited") {
+        T minDistanceVertexName = T{};
+        int minDistance = INT_MAX;
+        Node<T*>* current = verticesInfo -> getHead();
+        while (current) {
+            if (current -> getData()[2] == "notVisited" && stoi(current -> getData()[1]) < minDistance) {
+                minDistance = stoi(current -> getData()[1]);
+                minDistanceVertexName = current -> getData()[0];
+            }
+            current = current -> getNext();
+        }
+        if (minDistanceVertexName == T{} || getInfo(verticesInfo, minDistanceVertexName) == nullptr) {
+            break;
+        }
+        getInfo(verticesInfo, minDistanceVertexName)[2] = "Visited";
+        currentSquareName = minDistanceVertexName;
+        currentSquare = getSquare(adjacencyList, currentSquareName);
+        Node<T*>* neighbor = currentSquare -> neighbors -> getHead();
+        int currentSquareDistance = stoi(getInfo(verticesInfo, currentSquareName)[1]);
+        while (neighbor) {
+            T neighborName = neighbor -> getData()[0];
+            int neighborWeight = stoi(neighbor -> getData()[1]);
+            T* neighborInfo = getInfo(verticesInfo, neighborName);
+            if (neighborInfo[2] == "notVisited" && currentSquareDistance + neighborWeight < stoi(neighborInfo[1])) {
+                neighborInfo[1] = to_string(currentSquareDistance + neighborWeight);
+                neighborInfo[3] = currentSquareName;
+            }
+            neighbor = neighbor -> getNext();
+        }
+    }
+
+    LinkedList<T>* shortestPath = new LinkedList<T>;
+    shortestPath -> pushFront(treasureSquareName);
+    T parentSquareName = getInfo(verticesInfo, treasureSquareName)[3];
+    while (parentSquareName != T{}) {
+        shortestPath -> pushFront(parentSquareName);
+        parentSquareName = getInfo(verticesInfo, parentSquareName)[3];
+    }
+
+    shortestPath -> printLL();
+
+    Node<T*>* current = verticesInfo -> getHead();
+    while (current) {
+        delete[] current -> getData();
+        current = current -> getNext();
+    }
+    delete verticesInfo;
+    delete shortestPath;
 }
 
 template <typename T>
@@ -145,6 +207,17 @@ Node<T*>* Graph<T>::findTuple(LinkedList<T*>* parentSonList, const T& val, int i
     return nullptr;
 }
 
+template <typename T>
+T* Graph<T>::getInfo(LinkedList<T*>* verticesInfo, const T& val) {
+    Node<T*>* current = verticesInfo -> getHead();
+    while (current) {
+        if (current -> getData()[0] == val) {
+            return current -> getData();
+        }
+        current = current -> getNext();
+    }
+    return nullptr;
+}
 
 template <typename T>
 LinkedList<Square<T>*>* Graph<T>::getAdjacencyList() {

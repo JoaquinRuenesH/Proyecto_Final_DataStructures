@@ -7,6 +7,7 @@ private:
     LinkedList<Square<T>*>* adjacencyList;
     T treasureSquareName;
     Node<T*>* findTuple(LinkedList<T*>* parentSonList, const T& val, int index = 1);
+    T* getInfo(LinkedList<T*>* verticesInfo, const T& val);
 public:
     Graph();
     ~Graph();
