@@ -1,10 +1,12 @@
-#include"gameSetUp.h"
+#include"Execution.h"
 
 int main(){
 
-    GameSetUp setup;
+    Execution execution;
 
-    setup.uploadMonsters("monsters.txt");
+    if(!execution.start("monsters.txt", "map.txt")){
+        cout<<"Error al ejecutar el juego"<<endl;
+    };
 
     return 0;
 }

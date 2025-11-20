@@ -1,11 +1,11 @@
 7
 7
-Arkham Asylum
-Police Department
-Gotham's Hospital
-The Sewers
-The Pit
-City Hall
+Arkham Asylum,6
+Police Department,5
+Gotham's Hospital,4
+The Sewers,2
+The Pit,3
+City Hall,1
 Batcave
 Arkham Asylum,Police Department
 Police Department,Gotham's Hospital
