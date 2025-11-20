@@ -6,7 +6,9 @@
 #include"graph.h"
 #include"linkedList.h"
 
-#define MONSTER_ATRIB_SIZE 7
+#define MONSTER_ATTRIB_SIZE 7
+#define ADD_VERTEX_ATTRIB_SIZE 2
+#define ADD_EDGE_ATTRIB_SIZE 3
 
 using namespace std;
 
@@ -17,8 +19,9 @@ class GameSetUp{
     public:
         GameSetUp();
         ~GameSetUp();
-        bool uploadMonsters(string fileName);
-        bool uploadMap(string fileName);
+        LinkedList<Monster*>* uploadMonsters(string fileName);
+        Graph<string>* uploadMap(string fileName);
+        
         //bool exportStats();
 };
 

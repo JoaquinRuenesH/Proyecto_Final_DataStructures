@@ -1,4 +1,5 @@
 #include"gameSetUp.h"
+#include<iostream>
 
 using namespace std;
 
@@ -12,21 +13,21 @@ GameSetUp::~GameSetUp(){
 	delete map;
 }
 
-
-bool GameSetUp::uploadMonsters(string fileName){
+LinkedList<Monster*>* GameSetUp::uploadMonsters(string fileName){
 	ifstream file(fileName);
 	string line;
+	int errors = 0;
 
 	if (!file.is_open()){
 		cerr<<"Error while loading file: "<<fileName<<endl;
-		return false;
+		return nullptr;
 	}
 
 	// Jump header
 	if(!getline(file, line)) {
 		cerr<<"File doesnt have header"<<endl;
 		file.close();
-		return false;
+		return nullptr;
 	}
 
 	cout<<"Loading file: "<<fileName<<endl;
@@ -36,7 +37,6 @@ bool GameSetUp::uploadMonsters(string fileName){
 		stringstream ss(line);
 		string cell;
 		int attrib = 0;
-        int errors = 0;
 
 		while (getline(ss, cell, ',')) {
 			if(!cell.length()){
@@ -45,25 +45,56 @@ bool GameSetUp::uploadMonsters(string fileName){
 
 			switch(attrib) {
                 case 0:
+				try{
                     newMonster->setId(stoi(cell));
+				}catch(exception& e){
+					cout<<"Error in ID on file"<<endl;
+					errors++;
+				}
                     break;
 				case 1:
 					newMonster->setName(cell);
 					break;
 				case 2:
-					newMonster->setHP(stoi(cell));
+					try{
+						newMonster->setHP(stoi(cell));
+					}catch(exception& e){
+						cout<<"Error in HP on file"<<endl;
+						errors++;
+					}
 					break;
 				case 3:
-					newMonster->setATK(stoi(cell));
+					try{
+						newMonster->setATK(stoi(cell));
+					}catch(exception& e){
+						cout<<"Error in ATK on file"<<endl;
+						errors++;
+					}
 					break;
 				case 4:
-					newMonster->setDEF(stoi(cell));
+					try{
+						newMonster->setDEF(stoi(cell));
+					}catch(exception& e){
+						cout<<"Error in DEF on file"<<endl;
+						errors++;
+					}
 					break;
+
 				case 5:
-					newMonster->setProbability(stoi(cell));
+					try{
+						newMonster->setProbability(stoi(cell));
+					}catch(exception& e){
+						cout<<"Error in Probability on file"<<endl;
+						errors++;
+					}
 					break;
 				case 6:
-					newMonster->setReward(stoi(cell));
+					try{
+						newMonster->setReward(stoi(cell));
+					}catch(exception& e){
+						cout<<"Error in Reward on file"<<endl;
+						errors++;
+					}
 					break;
 				default:
 					errors++;
@@ -72,10 +103,10 @@ bool GameSetUp::uploadMonsters(string fileName){
 			attrib++;
 		}
 
-		if (errors || attrib != MONSTER_ATRIB_SIZE) {
-			cerr << "Error in line:\n" << line << endl;
+		if (errors || attrib != MONSTER_ATTRIB_SIZE) {
+			cerr<<"Error in line: "<<line<<endl;
 			file.close();
-			return false;
+			return nullptr;
 		}
 
 		monstersList->pushFront(newMonster);
@@ -84,43 +115,58 @@ bool GameSetUp::uploadMonsters(string fileName){
     cout<<"Monsters file loaded successfully"<<endl;
 
 	file.close();
-	return true;
+	return monstersList;
 }
 
 
 
-
-
-bool GameSetUp::uploadMap(string fileName){
+Graph<string>* GameSetUp::uploadMap(string fileName){
 	ifstream file(fileName);
 	string line;
+	int errors = 0;
 
 	if (!file.is_open()){
 		cerr<<"Error while loading file: "<<fileName<<endl;
-		return false;
+		return nullptr;
 	}
 
 	cout<<"Loading file: "<<fileName<<endl;
 
 	string size;
 
-	// Jump header + save in size variable
-	if(!getline(file, size)){
-		cerr<<"File doesnt have number of squares"<<endl;
+	if(!getline(file, size)){ // Get first line + save in size variable
+		cerr<<"File is empty"<<endl;
 		file.close();
-		return false;
+		return nullptr;
+	} 
+
+	int squares;
+
+	try{
+		squares = stoi(size); //number of squares
+	}catch(exception& e){
+		cerr<<"Error in number of squares"<<endl;
+		file.close();
+		return nullptr;
 	}
 
-	int squares = stoi(size); //number of squares
 
-	// Jump line + save in size variable to get number of edges
-	if(!getline(file, size)){
+
+	if(!getline(file, size)){ //get second line + save in size variable to get number of edges
 		cerr<<"File doesnt have the number of edges"<<endl;
 		file.close();
-		return false;
+		return nullptr;
 	}
 	
-	int edges = stoi(size); //number of edges
+	int edges;
+	
+	try{
+		edges = stoi(size); //number of edges
+	}catch(exception& e){
+		cerr<<"Error in number of edges"<<endl;
+		file.close();
+		return nullptr;
+	}
 
 	int i = 0;
 
@@ -128,22 +174,44 @@ bool GameSetUp::uploadMap(string fileName){
 	while(i<squares && getline(file, line)){
 		stringstream ss(line);
 		string cell;
-        int errors = 0;
+		int attrib = 0;
+		string currentSquare = "";
 
-		while (getline(ss, cell)) {
+		while (getline(ss, cell, ',')) {
 			if(!cell.length()){
 				errors++;
 			}
 
-			map->addSquare(cell);
-			//std::cout<<"Adding: "<<cell<<"\n";
+
+			switch(attrib){
+				case 0:
+					map->addSquare(cell);
+					currentSquare = cell;
+					break;
+				case 1:
+					try{
+						map->addMonster(currentSquare, stoi(cell)); //TODO
+					}catch(exception& e){
+						cout<<"Error in ID on file"<<endl;
+						errors++;
+					}
+                    break;
+
+				default:
+					errors++;
+					break;
+			}
+
+			//std::cout<<"Adding: "<<cell<<endl;
+
+			attrib++;
 			
 		}
 
-		if (errors) {
-			cerr << "Error in line:\n" << line << endl;
+		if (errors || attrib != ADD_VERTEX_ATTRIB_SIZE) {
+			cerr<<"Error in line: "<<line<<endl;
 			file.close();
-			return false;
+			return nullptr;
 		}
 
 		i++;
@@ -155,36 +223,37 @@ bool GameSetUp::uploadMap(string fileName){
 	while(i<edges && getline(file, line)){
 		stringstream ss(line);
 		string cell;
-        int errors = 0;
-		int time = 0;
-		string square1;
-		string square2;
+		int attrib = 0;
+		string square1 = "";
+		string square2 = "";
+		string weight = "";
 
 		while (getline(ss, cell, ',')){
 			if(!cell.length()){
 				errors++;
 			}
 
-			//If time%2 == 0, means it's the first square of the edge
-			if(time%2 == 0){
-				square1 = cell;
-			}else{
-				square2 = cell;
-			}
-			
-			//If time%2 == 1, means both squares for adding the edge had been asigned
-			if(time%2 == 1){
-				map->addEdge(square1, square2);
-				//cout<<"Adding edge: "<<square1<<", "<<square2<<"\n";
+			switch(attrib){
+				case 0:
+					square1 = cell;
+					break;
+				case 1:
+					square2 = cell;
+					break;
+				case 2:
+					weight = cell;
+					break;
 			}
 
-			time++;
+			attrib++;
 		}
 
-		if (errors) {
-			cerr << "Error in line:\n" << line << endl;
+		if (errors || attrib != ADD_EDGE_ATTRIB_SIZE) {
+			cerr<<"Error in line: "<<line<<endl;
 			file.close();
-			return false;
+			return nullptr;
+		}else{
+			map->addEdge(square1, square2, weight);
 		}
 
 		i++;
@@ -196,7 +265,7 @@ bool GameSetUp::uploadMap(string fileName){
 	if(!getline(file, treasureSquare)){
 		cerr<<"File doesnt have the treasure square"<<endl;
 		file.close();
-		return false;
+		return nullptr;
 	}
 
 	map->addTreasure(treasureSquare);
@@ -204,5 +273,6 @@ bool GameSetUp::uploadMap(string fileName){
     cout<<"Map file loaded successfully"<<endl;
 
 	file.close();
-	return true;
+
+	return map;
 }
