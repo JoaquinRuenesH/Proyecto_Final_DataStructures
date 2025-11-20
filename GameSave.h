@@ -19,6 +19,7 @@ public:
     void showNeighbors();
     void move(const T& nameSquare);
     void printCheatBFS();
+    void printDijkstra();
     void showGameStatus();
     bool isGameOver();
 };

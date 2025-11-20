@@ -13,8 +13,9 @@ public:
     void addSquare(const T& val);
     void addTreasure(const T& val);
     void addMonster(const T& squareName, Monster* m);
-    void addEdge(const T& val1, const T& val2, bool directed = false);
-    void CheatBFS(const T& initialSquareName);
+    void addEdge(const T& val1, const T& val2, const T& weight = "1", bool directed = false);
+    void cheatBFS(const T& initialSquareName);
+    void dijkstra(const T& initialSquareName);
     LinkedList<Square<T>*>* getAdjacencyList();
     T getTreasureSquareName();
 };

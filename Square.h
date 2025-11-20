@@ -13,9 +13,9 @@ private:
     Monster* monster;
     bool treasure;
 public:
-    LinkedList<T>* neighbors;
+    LinkedList<T*>* neighbors;
     Square(const T& val);
-    ~Square();
+    ~Square(); 
     T getName();
     void setName(const T& val);
     bool isVisited();

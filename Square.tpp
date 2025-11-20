@@ -5,13 +5,20 @@ Square<T>::Square(const T& val) {
     name = val;
     visited = false;
     visitedBFS = false;
-    neighbors = new LinkedList<T>();
+    neighbors = new LinkedList<T*>();
     monster = nullptr;
     treasure = false;
 }
 
 template <typename T>
 Square<T>::~Square() {
+    Node<T*>* head = neighbors -> getHead();
+    T* tempData;
+    while (head) {
+        tempData = head -> getData();
+        head = head -> getNext();
+        delete[] tempData;
+    }
     delete neighbors;
 }
 
