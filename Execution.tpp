@@ -300,6 +300,7 @@ bool Execution::uploadMap(string fileName){
 		string square1 = "";
 		string square2 = "";
 		string weight = "";
+		int weightInt;
 
 		while (getline(ss, cell, ',')){
 			if(!cell.length()){
@@ -314,6 +315,12 @@ bool Execution::uploadMap(string fileName){
 					square2 = cell;
 					break;
 				case 2:
+					try{
+						weightInt = stoi(cell);
+					}catch(exception& e){
+						cout<<"Error in weight of edge on file"<<endl;
+						errors++;
+					}
 					weight = cell;
 					break;
 			}
