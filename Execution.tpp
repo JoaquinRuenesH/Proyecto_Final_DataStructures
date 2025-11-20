@@ -126,7 +126,7 @@ bool Execution::uploadMonsters(string fileName){
 
 				case 5:
 					try{
-						newMonster->setProbability(stoi(cell));
+						newMonster->setProbability(stof(cell));
 					}catch(exception& e){
 						cout<<"Error in Probability on file"<<endl;
 						errors++;
@@ -236,7 +236,7 @@ bool Execution::uploadMap(string fileName){
 		string currentSquare = "";
         int monsterId;
         Monster* ptrMonster = nullptr;
-		bool addMonster = true;
+		bool addM = true;
 
 		while (getline(ss, cell, ',')) {
 			if(!cell.length()){
@@ -264,7 +264,7 @@ bool Execution::uploadMap(string fileName){
 							errors++;
 						}
 					}else{
-						addMonster = false;
+						addM = false;
 					}
 
                     break;
@@ -284,7 +284,7 @@ bool Execution::uploadMap(string fileName){
 			return false;
 		}
 
-		if(addMonster){
+		if(addM){
         	map->addMonster(currentSquare, ptrMonster);
 		}
 		
