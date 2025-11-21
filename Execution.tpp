@@ -29,7 +29,7 @@ bool Execution::start(string monstersFile, string mapFile){
     cout<<"Enter your hero's name: ";
     getline(cin, name);
 
-    Hero* hero = new Hero(1, name, 100, 30, 30); // se mete esto al constructor?
+    Hero* hero = new Hero(1, name, 100, 30, 30);
 
     GameSave<string>* player = new GameSave<string>(hero, map);
 
@@ -44,18 +44,16 @@ bool Execution::start(string monstersFile, string mapFile){
         getline(cin, cityName);
         player -> move(cityName);
         player -> showGameStatus();
+		player -> saveCurrentGameStatus();
     }
+
+	exportStats(player);
 
     delete player;
     delete hero;
 
     return true;
 }
-
-
-
-
-
 
 bool Execution::uploadMonsters(string fileName){
 	ifstream file(fileName);
@@ -355,5 +353,28 @@ bool Execution::uploadMap(string fileName){
 
 	file.close();
 
+	return true;
+}
+
+
+template<typename T>
+bool Execution::exportStats(GameSave<T>* plyr){
+	ofstream file("finalStats.txt", ios::app); //append infomation at the end of existent file
+
+	if(!file){
+		cout << "Data exportation error" << endl;
+		return false;
+	}
+
+	time_t timestamp;
+	time(&timestamp);
+
+  	file << "Date played: " << ctime(&timestamp);
+
+	file << plyr -> getCurrentGameStatus();
+
+	file.close();
+
+	cout << "Stats exported correctly";
 	return true;
 }

@@ -11,6 +11,7 @@ private:
     Square<T>* currentSquare;
     int moves;
     T squaresVisited;
+    string currentGameStatus;
     bool gameOver;
     bool fightMonster();
     bool treasureCheck();
@@ -21,6 +22,8 @@ public:
     void printCheatBFS();
     void printDijkstra();
     void showGameStatus();
+    void saveCurrentGameStatus();
+    string getCurrentGameStatus();
     bool isGameOver();
 };
 

@@ -105,3 +105,24 @@ Square<U>* getSquare(LinkedList<Square<U>*>* list, const U& val) {
     }
     return nullptr;
 }
+
+
+template <typename T>
+string LinkedList<T>::getLLTuples() {
+    string data = "[]";
+
+    if (!head) {
+        return data;
+    }
+    Node<T>* current = head;
+    data = "[";
+    while (current -> getNext()) {
+        data += "[" + current -> getData()[0] + ", ";
+        data += current -> getData()[1] + "], ";
+        current = current -> getNext();
+    }
+    data += "[" + current -> getData()[0] + ", ";
+    data += current -> getData()[1] + "]]";
+
+    return data;
+}

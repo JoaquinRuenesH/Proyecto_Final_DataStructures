@@ -2,6 +2,7 @@
 
 #include<iostream>
 #include<string>
+#include<ctime>
 using namespace std;
 #include"GameSave.h"
 #include"Hero.h"
@@ -20,7 +21,10 @@ class Execution{
         bool uploadMonsters(string fileName);
         Monster* searchMonster(int id);
         bool uploadMap(string fileName);
-        //bool exportData();
+
+        template<typename T>
+        bool exportStats(GameSave<T>* plyr);
+
     public:
         Execution();
         ~Execution();

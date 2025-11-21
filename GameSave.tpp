@@ -135,3 +135,25 @@ bool GameSave<T>::isGameOver() {
     }
     return gameOver;
 }
+
+
+template <typename T>
+void GameSave<T>::saveCurrentGameStatus() {
+    currentGameStatus = "Last Square visited: " + currentSquare -> getName() + 
+                        "\nMoves: " + to_string(moves) + 
+                        "\nSquares Visited: [" + squaresVisited + "]" + 
+                        "\nMonsters defeated: " + hero -> getMonstersDefeated() -> getLLTuples() + 
+                        "\nHero:" + 
+                        "\nName: " + hero -> getName() + 
+                        "\nHP: " + to_string(hero -> getHP()) + 
+                        "\nATK: " + to_string(hero -> getATK()) +
+                        "\nDEF: " + to_string(hero -> getDEF()) +
+                        "\nReward Points: " + to_string(hero -> getRewardPoints()) +
+                        "\n---------------\n";
+}
+
+
+template <typename T>
+string GameSave<T>::getCurrentGameStatus() {
+    return currentGameStatus;
+}

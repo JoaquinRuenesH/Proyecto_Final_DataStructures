@@ -14,6 +14,7 @@ public:
     void printLL();
     void printLLFirstTupleVal();
     void printLLTuples();
+    string getLLTuples();
 };
 
 template <typename U>
