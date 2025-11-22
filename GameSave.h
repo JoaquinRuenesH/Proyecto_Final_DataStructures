@@ -20,6 +20,7 @@ private:
 public:
     GameSave(Hero* h, Graph<T>* map);
     void showNeighbors();
+    void showSquares();
     void move(const T& nameSquare);
     void printCheatBFS();
     void printDijkstra();

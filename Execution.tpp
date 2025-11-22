@@ -40,6 +40,7 @@ bool Execution::start(string monstersFile, string mapFile){
     
     while (!player -> isGameOver()) {
         player -> showNeighbors();
+		player -> showSquares();
         cout << "Where to move: ";
         getline(cin, cityName);
         player -> move(cityName);

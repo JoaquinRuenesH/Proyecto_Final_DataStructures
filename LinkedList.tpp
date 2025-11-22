@@ -126,3 +126,15 @@ string LinkedList<T>::getLLTuples() {
 
     return data;
 }
+
+template<typename T>
+int LinkedList<T>::getSize(){
+    Node<T>* current = head;
+    int sz = 0;
+    while(current){
+        sz++;
+        current = current->getNext();
+    }
+
+    return sz;
+}

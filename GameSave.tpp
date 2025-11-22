@@ -171,3 +171,165 @@ template <typename T>
 string GameSave<T>::getCurrentGameStatus() {
     return currentGameStatus;
 }
+
+template<typename T>
+void GameSave<T>::showSquares(){
+    LinkedList<T*>* squareOptions = currentSquare -> neighbors;
+    int numSquares = squareOptions -> getSize();
+    string midSpace = "       ";
+    string space = "               ";
+    int currentSquareSize = currentSquare -> getName().length();
+
+    if(currentSquareSize < 15){
+        currentSquareSize = 15;
+    }
+
+    if(numSquares % 2 == 0){
+        for(int i = 0; i<(numSquares/2); i++){
+            cout << midSpace;
+        }
+        for(int i = 0; i<(currentSquareSize + 4); i++){
+            cout << "-";
+        }
+        cout << "\n";
+
+
+        for(int i = 0; i<(numSquares/2); i++){
+            cout << midSpace;
+        }
+        cout<<"|";
+        for(int i = 0; i<((currentSquareSize - 11)/2 + 1); i++){
+            cout<<" ";
+        }
+        cout<<"You are here";
+        for(int i = 0; i<((currentSquareSize - 11)/2 + 1); i++){
+            cout<<" ";
+        }
+        cout<<"|\n";
+
+
+        for(int i = 0; i<(numSquares/2); i++){
+            cout << midSpace;
+        }
+        cout<<"|";
+        for(int i = 0; i<((19-(currentSquare->getName().length()))/2); i++){
+            cout<<" ";
+        }
+        cout<< currentSquare -> getName();
+        for(int i = 0; i<((19-(currentSquare->getName().length()))/2); i++){
+            cout<<" ";
+        }
+        cout<<"|\n";
+
+
+        for(int i = 0; i<(numSquares/2); i++){
+            cout << midSpace;
+        }
+        for(int i = 0; i<(currentSquareSize + 4); i++){
+            cout << "-";
+        }
+        cout << "\n";
+        
+    }else{
+        for(int i = 0; i<(numSquares/2); i++){
+            cout << space;
+        }
+        for(int i = 0; i<(currentSquareSize + 4); i++){
+            cout << "-";
+        }
+        cout << "\n";
+
+
+        for(int i = 0; i<(numSquares/2); i++){
+            cout << space;
+        }
+        cout<<"|";
+        for(int i = 0; i<((currentSquareSize - 11)/2 + 1); i++){
+            cout<<" ";
+        }
+        cout<<"You are here";
+        for(int i = 0; i<((currentSquareSize - 11)/2 + 1); i++){
+            cout<<" ";
+        }
+        cout<<"|\n";
+
+
+        for(int i = 0; i<(numSquares/2); i++){
+            cout << space;
+        }
+        cout<<"|";
+        for(int i = 0; i<((19-(currentSquare->getName().length()))/2); i++){
+            cout<<" ";
+        }
+        cout<< currentSquare -> getName();
+        for(int i = 0; i<((19-(currentSquare->getName().length()))/2); i++){
+            cout<<" ";
+        }
+        cout<<"|\n";
+
+
+        for(int i = 0; i<(numSquares/2); i++){
+            cout << space;
+        }
+        for(int i = 0; i<(currentSquareSize + 4); i++){
+            cout << "-";
+        }
+        cout << "\n";
+
+    }
+
+
+    if (!squareOptions -> getHead()) {
+        cout<<"\n";
+    }else{
+        Node<T*>* current = squareOptions -> getHead();
+        while (current) {
+            int currentLength = current->getData()[0].length();
+            for(int i = 0; i<(currentLength + 4)/2; i++){
+                cout << " ";
+            }
+            cout<<"|";
+            for(int i = 0; i<(currentLength + 4)/2; i++){
+                cout << " ";
+            }
+            current = current->getNext();
+            cout<<"     ";
+        }
+        cout<<"\n";
+
+        cout<<"  ";
+        current = squareOptions -> getHead();   
+        while (current) {
+            int currentLength = current->getData()[0].length();
+            for(int i = 0; i<(currentLength + 4); i++){
+                cout << "-";
+            }
+            cout<<"     ";
+            current = current->getNext();
+        }
+        cout<<"\n";
+
+        current = squareOptions -> getHead();
+        int count = 1;
+        while (current) {
+            cout<<"| "<<count<<". "<<current -> getData()[0]<<" |   ";
+            current = current->getNext();
+            count++;
+        }
+        cout<<"\n";
+
+        cout<<"  ";
+        current = squareOptions -> getHead();   
+        while (current) {
+            int currentLength = current->getData()[0].length();
+            for(int i = 0; i<(currentLength + 4); i++){
+                cout << "-";
+            }
+            cout<<"     ";
+            current = current->getNext();
+        }
+        cout<<"\n";
+
+    }
+
+}

@@ -11,6 +11,7 @@ public:
     void pushFront(const T& val);
     Node<T>* getHead();
     Node<T>* getNode(const T& val);
+    int getSize();
     void printLL();
     void printLLFirstTupleVal();
     void printLLTuples();
