@@ -176,7 +176,6 @@ template<typename T>
 void GameSave<T>::showSquares(){
     LinkedList<T*>* squareOptions = currentSquare -> neighbors;
     int numSquares = squareOptions -> getSize();
-    string midSpace = "       ";
     string space = "               ";
     int currentSquareSize = currentSquare -> getName().length();
 
@@ -185,98 +184,54 @@ void GameSave<T>::showSquares(){
     }
 
     if(numSquares % 2 == 0){
-        for(int i = 0; i<(numSquares/2); i++){
-            cout << midSpace;
-        }
-        for(int i = 0; i<(currentSquareSize + 4); i++){
-            cout << "-";
-        }
-        cout << "\n";
-
-
-        for(int i = 0; i<(numSquares/2); i++){
-            cout << midSpace;
-        }
-        cout<<"|";
-        for(int i = 0; i<((currentSquareSize - 11)/2 + 1); i++){
-            cout<<" ";
-        }
-        cout<<"You are here";
-        for(int i = 0; i<((currentSquareSize - 11)/2 + 1); i++){
-            cout<<" ";
-        }
-        cout<<"|\n";
-
-
-        for(int i = 0; i<(numSquares/2); i++){
-            cout << midSpace;
-        }
-        cout<<"|";
-        for(int i = 0; i<((19-(currentSquare->getName().length()))/2); i++){
-            cout<<" ";
-        }
-        cout<< currentSquare -> getName();
-        for(int i = 0; i<((19-(currentSquare->getName().length()))/2); i++){
-            cout<<" ";
-        }
-        cout<<"|\n";
-
-
-        for(int i = 0; i<(numSquares/2); i++){
-            cout << midSpace;
-        }
-        for(int i = 0; i<(currentSquareSize + 4); i++){
-            cout << "-";
-        }
-        cout << "\n";
-        
-    }else{
-        for(int i = 0; i<(numSquares/2); i++){
-            cout << space;
-        }
-        for(int i = 0; i<(currentSquareSize + 4); i++){
-            cout << "-";
-        }
-        cout << "\n";
-
-
-        for(int i = 0; i<(numSquares/2); i++){
-            cout << space;
-        }
-        cout<<"|";
-        for(int i = 0; i<((currentSquareSize - 11)/2 + 1); i++){
-            cout<<" ";
-        }
-        cout<<"You are here";
-        for(int i = 0; i<((currentSquareSize - 11)/2 + 1); i++){
-            cout<<" ";
-        }
-        cout<<"|\n";
-
-
-        for(int i = 0; i<(numSquares/2); i++){
-            cout << space;
-        }
-        cout<<"|";
-        for(int i = 0; i<((19-(currentSquare->getName().length()))/2); i++){
-            cout<<" ";
-        }
-        cout<< currentSquare -> getName();
-        for(int i = 0; i<((19-(currentSquare->getName().length()))/2); i++){
-            cout<<" ";
-        }
-        cout<<"|\n";
-
-
-        for(int i = 0; i<(numSquares/2); i++){
-            cout << space;
-        }
-        for(int i = 0; i<(currentSquareSize + 4); i++){
-            cout << "-";
-        }
-        cout << "\n";
-
+        space = "       ";
     }
+
+        
+    for(int i = 0; i<(numSquares/2); i++){
+        cout << space;
+    }
+    for(int i = 0; i<(currentSquareSize + 4); i++){
+        cout << "-";
+    }
+    cout << "\n";
+
+
+    for(int i = 0; i<(numSquares/2); i++){
+        cout << space;
+    }
+    cout<<"|";
+    for(int i = 0; i<((currentSquareSize - 11)/2 + 1); i++){
+        cout<<" ";
+    }
+    cout<<"You are here";
+    for(int i = 0; i<((currentSquareSize - 11)/2 + 1); i++){
+        cout<<" ";
+    }
+    cout<<"|\n";
+
+
+    for(int i = 0; i<(numSquares/2); i++){
+        cout << space;
+    }
+    cout<<"|";
+    for(int i = 0; i<((19-(currentSquare->getName().length()))/2); i++){
+        cout<<" ";
+    }
+    cout<< currentSquare -> getName();
+    for(int i = 0; i<((19-(currentSquare->getName().length()))/2); i++){
+        cout<<" ";
+    }
+    cout<<"|\n";
+
+
+    for(int i = 0; i<(numSquares/2); i++){
+        cout << space;
+    }
+    for(int i = 0; i<(currentSquareSize + 4); i++){
+        cout << "-";
+    }
+    cout << "\n";
 
 
     if (!squareOptions -> getHead()) {
