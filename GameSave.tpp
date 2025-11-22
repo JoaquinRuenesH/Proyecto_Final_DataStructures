@@ -9,6 +9,8 @@ GameSave<T>::GameSave(Hero* h, Graph<T>* map) {
     currentSquare -> setVisited(true);
     moves = 0;
     squaresVisited = currentSquare -> getName();
+    lastMonster = "";
+    win = false;
     gameOver = false;
 }
 
@@ -38,6 +40,7 @@ void GameSave<T>::move(const T& nameSquare) {
         if (fightMonster()) {
             cout << "Congratulations! You have defeated the final boss and gotten the treasure!";
             cout << "\n---------------\n";
+            win = true;
         } else {
             cout << "You lost to the final boss! Try again!";
             cout << "\n---------------\n";
@@ -112,6 +115,7 @@ bool GameSave<T>::fightMonster() {
     }
     CombatSystem* duel = new CombatSystem(hero, monster);
     bool result = duel -> fight();
+    lastMonster = monster -> getName();
     if (result) {
         currentSquare -> setMonster(nullptr);
         string* monsterMoves = new string[2];
@@ -127,6 +131,16 @@ template <typename T>
 bool GameSave<T>::treasureCheck() {
     return currentSquare -> hasTreasure();
 }
+
+template <typename T>
+string GameSave<T>::getLastMonster(){
+    return lastMonster;
+} 
+
+template <typename T>
+bool GameSave<T>::getWin(){
+    return win;
+} 
 
 template <typename T>
 bool GameSave<T>::isGameOver() {

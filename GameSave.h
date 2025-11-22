@@ -12,7 +12,9 @@ private:
     int moves;
     T squaresVisited;
     string currentGameStatus;
+    bool win;
     bool gameOver;
+    string lastMonster;
     bool fightMonster();
     bool treasureCheck();
 public:
@@ -24,6 +26,8 @@ public:
     void showGameStatus();
     void saveCurrentGameStatus();
     string getCurrentGameStatus();
+    string getLastMonster();
+    bool getWin();
     bool isGameOver();
 };
 

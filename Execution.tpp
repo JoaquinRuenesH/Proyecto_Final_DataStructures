@@ -369,7 +369,17 @@ bool Execution::exportStats(GameSave<T>* plyr){
 	time_t timestamp;
 	time(&timestamp);
 
+	string result;
+
+	if(plyr->getWin()){
+		result = "You won!\nYou got the treasure and defeated the final boss: " + plyr -> getLastMonster() + "\n"; 
+	}else{
+		result = "You lost.\nYou were defeated by: " + plyr -> getLastMonster() + "\n";
+	}
+
   	file << "Date played: " << ctime(&timestamp);
+
+	file << result;
 
 	file << plyr -> getCurrentGameStatus();
 
