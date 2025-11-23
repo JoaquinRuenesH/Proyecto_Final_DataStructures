@@ -12,6 +12,7 @@ public:
     Node<T>* getHead();
     Node<T>* getNode(const T& val);
     int getSize();
+    Node<T>* elementAt(unsigned int index);
     void printLL();
     void printLLFirstTupleVal();
     void printLLTuples();

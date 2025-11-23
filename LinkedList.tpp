@@ -138,3 +138,13 @@ int LinkedList<T>::getSize(){
 
     return sz;
 }
+
+template<typename T>
+Node<T>* LinkedList<T>::elementAt(unsigned int index){
+    Node<T>* current = head;
+    for(int i = 0; i<index; i++){
+        current = current->getNext();
+    }
+
+    return current;
+}

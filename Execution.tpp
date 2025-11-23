@@ -33,17 +33,33 @@ bool Execution::start(string monstersFile, string mapFile){
 
     GameSave<string>* player = new GameSave<string>(hero, map);
 
-    string cityName;
+    string nextSquare;
+	int nextSquareIndex;
+	bool validInput;
     player -> showGameStatus();
     player -> printCheatBFS();
 	player -> printDijkstra();
     
     while (!player -> isGameOver()) {
-        player -> showNeighbors();
-		player -> showSquares();
-        cout << "Where to move: ";
-        getline(cin, cityName);
-        player -> move(cityName);
+		validInput = false;
+		while(!validInput){
+			player -> showNeighbors();
+			player -> showSquares();
+			cout << "Write the number of the square to move: ";
+			getline(cin, nextSquare);
+			try{
+				nextSquareIndex = stoi(nextSquare);
+				if(nextSquareIndex <= 0 || nextSquareIndex > player -> getCurrentSquare() -> neighbors -> getSize()){
+					validInput = false;
+					cout << "\nUnexistent Square" << endl;
+				}else{
+					validInput = true;
+				}
+			}catch(exception& e){
+				cout << "\nInvalid input, use the number" << endl;
+			}
+		}
+        player -> move(nextSquareIndex-1);
         player -> showGameStatus();
 		player -> saveCurrentGameStatus();
     }

@@ -17,9 +17,48 @@ GameSave<T>::GameSave(Hero* h, Graph<T>* map) {
 template <typename T>
 void GameSave<T>::showNeighbors() {
     LinkedList<T*>* squareOptions = currentSquare -> neighbors;
-    cout << "Square options: ";
+    cout << "Square to move options: ";
     squareOptions -> printLLFirstTupleVal();
     cout << "\n---------------\n";
+}
+
+template <typename T>
+bool GameSave<T>::move(int index) {
+   Node<T*>* nextSquare = currentSquare -> neighbors -> elementAt(index);
+    if(!nextSquare){
+        cout << "Invalid move. Unexistent square." << "\n";
+        return false;
+    }
+
+    string nameSquare = nextSquare->getData()[0];
+    cout << nameSquare;
+    currentSquare = getSquare(map -> getAdjacencyList(), nameSquare);
+    currentSquare -> setVisited(true);
+    squaresVisited += " -> " + currentSquare -> getName();
+    moves++;
+    cout << "Welcome to '" << currentSquare -> getName() << "'";
+    cout << "\n---------------\n";
+    if (treasureCheck()) {
+        cout << "You have reached the final square! Defeat the monster to win";
+        cout << "\n---------------\n";
+        if (fightMonster()) {
+            cout << "Congratulations! You have defeated the final boss and gotten the treasure!";
+            cout << "\n---------------\n";
+            win = true;
+        } else {
+            cout << "You lost to the final boss! Try again!";
+            cout << "\n---------------\n";
+        }
+        gameOver = true;
+    } else {    
+        gameOver = !fightMonster();
+        if (gameOver) {
+            cout << "You lost! Try again!";
+            cout << "\n---------------\n";
+        }
+    }
+
+    return true;
 }
 
 template <typename T>
@@ -140,7 +179,12 @@ string GameSave<T>::getLastMonster(){
 template <typename T>
 bool GameSave<T>::getWin(){
     return win;
-} 
+}
+
+template <typename T>
+Square<T>* GameSave<T>::getCurrentSquare(){
+    return currentSquare;
+}
 
 template <typename T>
 bool GameSave<T>::isGameOver() {

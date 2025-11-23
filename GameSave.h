@@ -21,6 +21,7 @@ public:
     GameSave(Hero* h, Graph<T>* map);
     void showNeighbors();
     void showSquares();
+    bool move(int index);
     void move(const T& nameSquare);
     void printCheatBFS();
     void printDijkstra();
@@ -28,6 +29,7 @@ public:
     void saveCurrentGameStatus();
     string getCurrentGameStatus();
     string getLastMonster();
+    Square<T>* getCurrentSquare();
     bool getWin();
     bool isGameOver();
 };
