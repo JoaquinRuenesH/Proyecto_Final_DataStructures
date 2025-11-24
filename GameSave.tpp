@@ -31,7 +31,6 @@ bool GameSave<T>::move(int index) {
     }
 
     string nameSquare = nextSquare->getData()[0];
-    cout << nameSquare;
     currentSquare = getSquare(map -> getAdjacencyList(), nameSquare);
     currentSquare -> setVisited(true);
     squaresVisited += " -> " + currentSquare -> getName();

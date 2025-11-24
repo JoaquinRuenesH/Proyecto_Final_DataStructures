@@ -31,6 +31,8 @@ bool Execution::start(string monstersFile, string mapFile){
 
     Hero* hero = new Hero(1, name, 100, 30, 30);
 
+	cout << "---------------\n";
+
     GameSave<string>* player = new GameSave<string>(hero, map);
 
     string nextSquare;
@@ -403,5 +405,6 @@ bool Execution::exportStats(GameSave<T>* plyr){
 	file.close();
 
 	cout << "Stats exported correctly";
+	cout << "\n---------------\n";
 	return true;
 }
