@@ -5,7 +5,7 @@ int main(){
 
     Execution execution;
 
-    if(!execution.start("monsters.txt", "map.txt")){
+    if(!execution.start("monstersSpiderMan.txt", "mapSpiderMan.txt")){
         cout<<"Error al ejecutar el juego"<<endl;
     }
 

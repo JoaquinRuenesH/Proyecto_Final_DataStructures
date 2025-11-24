@@ -262,10 +262,14 @@ void GameSave<T>::showSquares(){
         cout<<" ";
     }
     cout<< currentSquare -> getName();
-    for(int i = 0; i<((19-(currentSquare->getName().length()))/2); i++){
+    for(int i = 0; i<((18-(currentSquare->getName().length()))/2); i++){
         cout<<" ";
     }
-    cout<<"|\n";
+    if((currentSquare->getName().length()) %2 == 0){
+        cout<<" |\n";
+    }else{
+        cout<<"|\n";
+    }
 
 
     for(int i = 0; i<(numSquares/2); i++){
@@ -287,7 +291,7 @@ void GameSave<T>::showSquares(){
                 cout << " ";
             }
             cout<<"|";
-            for(int i = 0; i<(currentLength + 4)/2; i++){
+            for(int i = 0; i<(currentLength + 6)/2; i++){
                 cout << " ";
             }
             current = current->getNext();
@@ -302,7 +306,7 @@ void GameSave<T>::showSquares(){
             for(int i = 0; i<(currentLength + 4); i++){
                 cout << "-";
             }
-            cout<<"     ";
+            cout<<"      ";
             current = current->getNext();
         }
         cout<<"\n";
@@ -323,7 +327,7 @@ void GameSave<T>::showSquares(){
             for(int i = 0; i<(currentLength + 4); i++){
                 cout << "-";
             }
-            cout<<"     ";
+            cout<<"      ";
             current = current->getNext();
         }
         cout<<"\n";

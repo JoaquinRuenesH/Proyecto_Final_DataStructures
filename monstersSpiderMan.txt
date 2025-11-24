@@ -1,0 +1,10 @@
+id,name,HP,ATK,DEF,probability,reward
+1,Robber 1,100,5,15,0.8,3
+2,Robber 2,100,5,15,0.8,3
+3,Shocker,100,30,50,0.7,6
+4,Sandman,100,50,60,0.7,7
+5,Black Cat,100,30,80,0.6,7
+6,Lizard,100,60,70,0.6,9
+7,Electro,100,60,70,0.6,9
+8,Doc-Ock,100,70,80,0.7,10
+9,Green Goblin,100,90,80,1,15
