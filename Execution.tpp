@@ -39,8 +39,8 @@ bool Execution::start(string monstersFile, string mapFile){
 	int nextSquareIndex;
 	bool validInput;
     player -> showGameStatus();
-    player -> printCheatBFS();
-	player -> printDijkstra();
+    //player -> printCheatBFS();
+	//player -> printDijkstra();
     
     while (!player -> isGameOver()) {
 		validInput = false;
@@ -49,6 +49,15 @@ bool Execution::start(string monstersFile, string mapFile){
 			player -> showSquares();
 			cout << "Write the number of the square to move: ";
 			getline(cin, nextSquare);
+			if(nextSquare == "showbfs"){
+				cout << "---------------\n";
+				player -> printCheatBFS();
+				continue;
+			}else if(nextSquare == "showdijkstra"){
+				cout << "---------------\n";
+				player -> printDijkstra();
+				continue;
+			}
 			try{
 				nextSquareIndex = stoi(nextSquare);
 				if(nextSquareIndex <= 0 || nextSquareIndex > player -> getCurrentSquare() -> neighbors -> getSize()){
