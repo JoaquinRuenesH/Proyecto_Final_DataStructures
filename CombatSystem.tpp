@@ -106,13 +106,16 @@ bool CombatSystem::fight() {
     monster -> displayInfo();
     cout << "\n---------------\n";
     requestUseCoolDown();
-    requestUseTemporaryUpgrade();
+    if (hero -> getRewardPoints() >= 20) {
+        requestUseTemporaryUpgrade();
+    }
+    
     string hold;
     cout << "Press any letter to start the fight: ";
     getline(cin, hold);
     cout << "---------------\n";
     cout << "Turn Log:";
-    cout << "\n---------------\n";
+    cout << "\n---------------\n"; //
     bool heroWon = turns();
     if (heroWon) {
         cout << hero -> getName() << " defeated " << monster -> getName() << "!";
