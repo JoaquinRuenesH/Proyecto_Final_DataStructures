@@ -258,11 +258,11 @@ void GameSave<T>::showSquares(){
         cout << space;
     }
     cout<<"|";
-    for(int i = 0; i<((19-(currentSquare->getName().length()))/2); i++){
+    for(int i = 0; i<((19-(int(currentSquare->getName().length())))/2); i++){
         cout<<" ";
     }
     cout<< currentSquare -> getName();
-    for(int i = 0; i<((18-(currentSquare->getName().length()))/2); i++){
+    for(int i = 0; i<((18-(int(currentSquare->getName().length())))/2); i++){
         cout<<" ";
     }
     if((currentSquare->getName().length()) %2 == 0){
