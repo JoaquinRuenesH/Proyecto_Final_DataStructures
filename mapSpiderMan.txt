@@ -1,5 +1,5 @@
 10
-13
+14
 JFK Bridge,9
 ATM,1
 Jewelry,2
@@ -14,13 +14,14 @@ Apartment,Jewelry,2
 Apartment,ATM,1
 ATM,Art Gallery,3
 Jewelry,Art Gallery,3
-Art Gallery,Beach,4
+Art Gallery,Beach,8
 Art Gallery,Pet Shop,3
-Art Gallery,NYC Zoo,5
-Pet Shop,Times Square,6
-NYC Zoo,Beach,5
-NYC Zoo,Times Square,6
-Times Square,Fusion Lab,7
+Art Gallery,NYC Zoo,7
+Pet Shop,Times Square,4
+NYC Zoo,Beach,7
+NYC Zoo,Times Square,4
+Pet Shop,Fusion Lab,8
 Times Square,JFK Bridge,9
 Fusion Lab,JFK Bridge,9
+Beach,JFK Bridge,9
 JFK Bridge
