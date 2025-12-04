@@ -96,10 +96,6 @@ Proyecto_Final_DataStructures/
 │   ├── README.md                     # This file
 │   └── Exploration Videogame Gotham's Map.pdf  # Visual map reference
 │   └── TODO  # Visual map reference
-
-│
-└── Build Artifacts
-    └── main                          # Compiled executable (macOS/Linux)
 ```
 
 ---
@@ -510,11 +506,13 @@ This file captures gameplay statistics regardless of theme.
 
 ## Authors
 
-**Course**: Data Structures and Algorithms (TC1031)
-**Semester**: Third Semester
-**B.S.**: Robotics and Digital Systems Engineering
-**Institution**: Instituto Tecnológico y de Estudios Superiores de Monterrey Campus Ciudad de México 
-**Repository**: [JoaquinRuenesH/Proyecto_Final_DataStructures](https://github.com/JoaquinRuenesH/Proyecto_Final_DataStructures)
+- Ricardo Morán Ávila (A01661056)
+- Joaquín Ruenes Hernández (A01661196)
+- **Course**: Data Structures and Algorithms (TC1031)
+- **Semester**: Third Semester
+- **B.S.**: Robotics and Digital Systems Engineering
+- **Institution**: Instituto Tecnológico y de Estudios Superiores de Monterrey Campus Ciudad de México 
+- **Repository**: [JoaquinRuenesH/Proyecto_Final_DataStructures](https://github.com/JoaquinRuenesH/Proyecto_Final_DataStructures)
 
 ---
 
