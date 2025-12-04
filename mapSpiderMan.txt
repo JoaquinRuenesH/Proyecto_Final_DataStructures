@@ -12,16 +12,16 @@ Fusion Lab,8
 Apartment,-1
 Apartment,Jewelry,1
 Apartment,ATM,1
-ATM,Jewelry,2
+ATM,Jewelry,1
 ATM,Art Gallery,3
 Jewelry,Art Gallery,3
 Art Gallery,Beach,4
 Art Gallery,Pet Shop,3
 Art Gallery,NYC Zoo,5
-Pet Shop,Times Square,5
-NYC Zoo,Beach,3
-NYC Zoo,Times Square,5
-Times Square,Fusion Lab,6
-Times Square,JFK Bridge,8
+Pet Shop,Times Square,6
+NYC Zoo,Beach,5
+NYC Zoo,Times Square,6
+Times Square,Fusion Lab,7
+Times Square,JFK Bridge,9
 Fusion Lab,JFK Bridge,9
 JFK Bridge
