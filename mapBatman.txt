@@ -1,0 +1,26 @@
+10
+13
+The Sewers,1
+The Playground,2
+The City Hall,3
+The Pit,4
+The Iceberg Lounge,5
+The Botanical Garden,6
+The Courtroom,7
+Gotham's Hospital,8
+Arkham Asylum,9
+The Batcave,-1
+The Batcave,The Sewers,1
+The Batcave,The Playground,7
+The Batcave,The City Hall,3
+The Sewers,The Pit,5
+The Sewers,The Iceberg Lounge,2
+The Playground,The Iceberg Lounge,3
+The Playground,Arkham Asylum,9
+The Playground,The Courtroom,7
+The City Hall,The Botanical Garden,2
+The City Hall,The Courtroom,5
+The Iceberg Lounge,Gotham's Hospital,7
+Gotham's Hospital,Arkham Asylum,8
+The Courtroom,The Botanical Garden,5
+Arkham Asylum
