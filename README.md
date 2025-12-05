@@ -95,7 +95,7 @@ Proyecto_Final_DataStructures/
 ├── Documentation
 │   ├── README.md                     # This file
 │   └── Exploration Videogame Gotham's Map.pdf  # Visual map reference
-│   └── TODO  # Visual map reference
+│   └── NYCSpiderManMap.pdf  # Visual map reference
 ```
 
 ---
