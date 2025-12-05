@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Build artifacts
+main
+*.out
+*.o
+*.obj
+*.exe
+
+# Stats Individuales del Usuario
+finalStats.txt

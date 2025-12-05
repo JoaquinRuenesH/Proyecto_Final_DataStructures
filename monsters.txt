@@ -1,7 +1,0 @@
-id,name,HP,ATK,DEF,probability,reward
-1,Two-Face,100,50,20,0.5,4
-2,KillerCroc,100,5,14,0.8,4
-3,Bane,100,80,50,0.9,10
-4,The Penguin,100,50,30,0.7,4
-5,The Riddler,100,80,23,0.6,8
-6,The Joker,100,95,70,1,20
